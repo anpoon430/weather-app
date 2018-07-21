@@ -4,9 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link rel="stylesheet" href = 'Assets/styles/main.css'>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script defer src = 'scripts/app.js'></script>
+  <title>Weather App</title>
 </head>
 <body>
-
+  <main>
+    <article id = 'app' class = 'container center-align'>
+      <article id = 'today'>
+        <header>
+         <h1>Weather App</h1> <!--updated with city name-->
+        </header>
+        <h2>Today's weather</h2>
+      </article>
+      <section class = 'row'>
+        <article id= 'day2' class = 'col s4'>day 2</article>
+        <article id= 'day3' class = 'col s4'>day 3 </article>
+        <article id = 'day4' class = 'col s4'>day 4</article>
+      </section>
+    </article>
+  </main>
+  <footer class = 'container'>
+    <p>Powered by <a href = 'https://darksky.net/poweredby/' target = '_blank'>Dark Sky</a></p>
+  </footer>
 </body>
 </html>
