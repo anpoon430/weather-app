@@ -22,6 +22,14 @@ function getWeather(pos) {
 
 function displayWeather(data){
   let city = document.querySelector('#city');
+  let today = document.querySelector('#today');
+  let iconURL = data.weather[0].icon;
   city.textContent = data.name;
+  console.log(data);
+  let iconElement = document.createElement('img');
+
+  iconElement.setAttribute('src', iconURL);
+  today.appendChild(iconElement);
+
 
 }
