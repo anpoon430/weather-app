@@ -22,40 +22,48 @@ function getWeather(pos) {
 }
 
 function displayWeather(data){
+  let app = document.querySelector('#app');
   let city = document.querySelector('#city');
   let upper = document.querySelector('#upper');
-  let app = document.querySelector('#app');
-  let iconURL = data.weather[0].icon;
   let header = document.querySelector('header');
+
   let img = document.createElement('img');
   let h2 = document.createElement('h2');
   let h3 = document.createElement('h3');
-  let section = document.createElement('section');
+  let button = document.createElement('button');
   let div = document.createElement('div');
-  let div2 = div.cloneNode();
-  let div3 = div.cloneNode();
-  console.log(data);
-  city.textContent = data.name;
-  h2.textContent = data.weather[0].description;
+
+  div.setAttribute('class', 'container center-align');
+  div.setAttribute('id', 'tempAndButton');
+  button.setAttribute('class', 'btn-floating btn-large waves-effect waves-light red');
+  h2.setAttribute('id', 'weatherDescription');
+  h3.setAttribute('class', 'temp',);
+  h3.setAttribute('style', 'margin: 10px 5px 0px 5px; display: inline-block');
+
+
+  let iconURL = data.weather[0].icon || '';
   img.setAttribute('src', iconURL);
 
-  h2.setAttribute('id', 'weatherDescription');
-  setAttributes(section, {id:'lower', class:'row'});
-  setAttributes(div, {id:'humidity', class: 'col s4'});
-  setAttributes(div2, {id:'hitemp', class: 'col s4'});
-  setAttributes(div3, {id:'lotemp', class: 'col s4'});
-  h3.setAttribute('id', 'temp');
+  console.log(data);
+
+  button.textContent = '°C';   //initialize values
+  city.textContent = data.name;
+  h2.textContent = data.weather[0].description;
+  h3.textContent = data.main.temp;
+
+
+
+  div.appendChild(h3);
+  div.appendChild(button);
   header.appendChild(h2);
   upper.appendChild(img);
-  upper.appendChild(h3);
-  app.appendChild(section);
+  upper.appendChild(div);
+  // let tempAndButton = document.querySelector('#tempAndButton');
 
-  let lower = document.querySelector('#lower');
-  lower.appendChild(div);
-  lower.appendChild(div2);
-  lower.appendChild(div3);
-  let temp = document.querySelector('#temp');
-  temp.textContent = data.main.temp;
+
+
+  button = app.querySelector('button');
+  let originalTemps = [];
 
   let hitemp = document.querySelector('#hitemp');
   let lotemp = document.querySelector('#lotemp');
@@ -64,8 +72,25 @@ function displayWeather(data){
   hitemp.textContent = data.main['temp_max'];
   lotemp.textContent = data.main['temp_min'];
 
-}
-
-function setAttributes(el, obj){
-  Object.keys(obj).forEach(attr => el.setAttribute(attr, obj[attr]));
+  button.addEventListener('click', function(){
+    let temps = app.querySelectorAll('.temp');
+    console.log(temps);
+    if (button.textContent === '°C') {
+      button.textContent = '°F';
+      temps.forEach((e) => {
+        if (originalTemps.length <= temps.length) {
+          originalTemps.push(e.textContent);
+        }
+          console.log(e.textContent);
+        let farenheit = Number(e.textContent) * 1.8 + 32;
+        e.textContent = Math.round(farenheit);
+      })
+    }
+    else {
+      button.textContent = '°C';
+      temps.forEach((e, i) => {
+        e.textContent = originalTemps[i];
+      });
+    }
+  })
 }
